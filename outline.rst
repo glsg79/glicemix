@@ -12,7 +12,7 @@ Interfaccia principale:
 - Impostazioni
 - Modifica dati
 - Esci
-		
+
 
 Ciclo principale:
  - Mostra menu
@@ -35,4 +35,3 @@ Avvio:
 			- Se database inesistente -> crea database
 			- Se database TOFU -> avviso + ricrea database vuoto (con opzione per ripristino da backup)
 		- Prompt (interfaccia principale)
-		
