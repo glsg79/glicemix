@@ -1,19 +1,24 @@
 Glicemix
 ========
-A simple diabetes diary
+A simple personal diary for diabetes management
 
 
 What's this crap?
 -----------------
-Glicemix is an ambitious idea I had when I realized that among all those similar
-applications to manage my pathology, there is no one that do what I really need.
+Glicemix, from the italian word glicemia that stands for "blood sugar level",
+is my attempt to create a simple diary to track my pathology with a super simple
+application.
+There are a bunch of apps like this out there, but I wanted one that does just
+what I need and I'd like it to be free and opensource.
 
-Rants aside, the final goal here is to create a relatively simple diary
-(using Python and Gtk) to keep track of all health data, and more, that are
-relevant.
-
-By now I'm just experimenting with some function to manipulate what I have,
+By now I'm just experimenting with some function to manipulate what I have
 trying to learn something in the process.
+
+My goal is to have something modular so one can add plugins to i.e. import
+from different sources or glucose meters.
+I will try to add support for mine, but for now I started simply importing a
+file exported from the official (proprietary and crappy) application made for
+it.
 
 If you are ended up here and want to help me, or drop me a line, please feel
 free to do so, I will really appreciate.
