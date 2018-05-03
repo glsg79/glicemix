@@ -1,6 +1,4 @@
-#!/usr/bin/env python
-'''This is a the database module
-'''
+"""This is a the database module."""
 
 import sqlite3
 import csv
@@ -83,4 +81,4 @@ def eliminatabella(conn):
 # eliminatabella(conn)
 
 # checkdb()
-importfromfile('20180421-all.csv')
+# importfromfile('20180421-all.csv')

@@ -1,23 +1,58 @@
-#!/usr/bin/env python
-''' urightparser.py
-load malformed csv exported from uright app and parse with
-regex
-'''
-import re
+"""Parse malformed csv from Uright proprietary app.
+
+# TODO: improve documentation
+"""
+import chardet
+import csv
+from datetime import datetime as dt
 
 
-def parse(filename):
-    try:
-        open(filename, 'r', encoding='UTF-16')
-    except FileNotFoundError:
-        print('File non trovato')
-        return None
-    with open(filename, 'r', encoding='UTF-16') as badcsv:
-        next(badcsv)        # Skip first line that has column names
-        for row in badcsv:
-            mdate = re.findall(r'\d{2}/\d{2}/\d{4}', row)
-            mtime = re.findall(r'\d{2}\.\d{2}', row)
-            mvalue = re.findall(r'Glucose\s="(\d{1,3})\s', row)
-            mtype = re.findall(r'"(AC|Gen|PC)"', row)
-            measurement = *mdate, *mtime, *mvalue, *mtype
-            print(measurement)
+def getencoding(f):
+    """Find the encoding of a given file.
+
+    Args:
+        f(string)    file name or complete path
+    Returns:
+        a string with the format detected, i.e. 'UTF-8' 'ASCII'
+    """
+    rawdata = open(f, 'rb').read()
+    encoding = chardet.detect(rawdata)['encoding']
+    return encoding
+
+
+def urightparse(f, enc='UTF-8'):
+    """Parse the file exported by the Uright windows applicationself.
+
+    Args:
+        f(string)   the file name to parse
+    Returns:
+        a list of tuples or dictionaries with all I need
+    """
+    clean_input = str.maketrans('.', ':', ' ="')
+    mtypedict = {'Gen': 'X', 'AC': 'B', 'PC': 'A'}
+    measurement = []
+
+    with open(f, 'r', encoding=enc) as badcsv:
+        rows = csv.reader(badcsv, delimiter="\t")
+        next(rows, None)  # Skip first line that has column names
+
+        for row in rows:
+            m_date = row[2].translate(clean_input)
+            m_date = dt.strftime(dt.strptime(m_date, '%d/%m/%Y'), '%Y-%m-%d')
+            m_time = row[3].translate(clean_input)
+            m_level = row[5][:-6].translate(clean_input)
+            m_type = mtypedict[row[7].translate(clean_input)]
+
+            measurement.append({'m_date': m_date,
+                                'm_time': m_time,
+                                'm_level': m_level,
+                                'm_type': m_type})
+    return measurement
+
+
+# Testing
+filetoread = '/home/glsg/Projects/glicemix/20180421-all.csv'
+enc = getencoding(filetoread)
+result = urightparse(filetoread, enc)
+
+print(result)
