@@ -20,14 +20,18 @@ def getencoding(f):
     return encoding
 
 
-def urightparse(f, enc='UTF-8'):
+def urightparse(f, enc=None):
     """Parse the file exported by the Uright windows applicationself.
 
     Args:
         f(string)   the file name to parse
+        enc(string) the file encoding if known else it is detected by chardet
     Returns:
         a list of tuples or dictionaries with all I need
     """
+    if enc == None:
+        enc = getencoding(f)
+
     clean_input = str.maketrans('.', ':', ' ="')
     mtypedict = {'Gen': 'X', 'AC': 'B', 'PC': 'A'}
     measurement = []
@@ -43,16 +47,13 @@ def urightparse(f, enc='UTF-8'):
             m_level = row[5][:-6].translate(clean_input)
             m_type = mtypedict[row[7].translate(clean_input)]
 
-            measurement.append({'m_date': m_date,
-                                'm_time': m_time,
-                                'm_level': m_level,
-                                'm_type': m_type})
+            measurement.append((m_date, m_time, m_level, m_type))
     return measurement
 
 
 # Testing
-filetoread = '/home/glsg/Projects/glicemix/20180421-all.csv'
-enc = getencoding(filetoread)
-result = urightparse(filetoread, enc)
+# filetoread = '/home/glsg/Projects/glicemix/20180421-all.csv'
+# enc = getencoding(filetoread)
+# result = urightparse(filetoread, enc)
 
-print(result)
+# print(result)
