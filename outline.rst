@@ -17,10 +17,10 @@ Interfaccia principale:
 
 Avvio:
 * Carica impostazioni
-	- Check impostazioni
-		- Se primo avvio o impostazioni TOFU -> rifare configurazione
+  - Check impostazioni
+    - Se primo avvio o impostazioni TOFU -> rifare configurazione
 * Apri database
-	- Check database
-		- Se database inesistente -> crea database
-		- Se database TOFU -> avviso + ricrea database vuoto (con opzione per ripristino da backup)
-	- Interfaccia principale
+  - Check database
+    - Se database inesistente -> crea database
+    - Se database TOFU -> avviso + ricrea database vuoto (con opzione per ripristino da backup)
+  - Interfaccia principale

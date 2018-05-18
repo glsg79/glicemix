@@ -3,7 +3,6 @@
 """
 import chardet
 import csv
-from datetime import datetime as dt
 
 filetoread = '20180421-all.csv'
 

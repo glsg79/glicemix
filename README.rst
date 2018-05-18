@@ -5,7 +5,7 @@ A simple personal diary for diabetes management
 
 What's this crap?
 -----------------
-Glicemix, from the italian word glicemia that stands for "blood sugar level",
+Glicemix, from the italian word *glicemia* that stands for "blood sugar level",
 is my attempt to create a simple diary to track my pathology with a super simple
 application.
 There are a bunch of apps like this out there, but I wanted one that does just
